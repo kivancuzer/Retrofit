@@ -6,11 +6,14 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -94,8 +97,8 @@ public interface JsonPlaceHolderApi {
      * Create Post with FormUrlEncoded and Field
      *
      * @param userId which user will be post this.
-     * @param title which title will be used in post's title.
-     * @param text which text will be used in post's body.
+     * @param title  which title will be used in post's title.
+     * @param text   which text will be used in post's body.
      * @return post
      */
     @FormUrlEncoded
@@ -114,6 +117,39 @@ public interface JsonPlaceHolderApi {
      */
     @FormUrlEncoded
     @POST("posts")
-    Call<Post> createPost(@FieldMap Map<String,String> fields);
+    Call<Post> createPost(@FieldMap Map<String, String> fields);
+
+    /**
+     * Put post
+     * change old post with the new one
+     * if some parameters are null it will be change post with null values.)
+     *
+     * @param id   which post will be updated.
+     * @param post is new post which will be replaced with old one.
+     * @return post which is updated
+     */
+    @PUT("posts/{id}")
+    Call<Post> putPost(@Path("id") int id, @Body Post post);
+
+    /**
+     * Patch Post
+     * change new values with the old values
+     * if some parameters are null it won't change
+     *
+     * @param id   which post will be updated.
+     * @param post is new post which will be replaced with old one.
+     * @return post which is updated.
+     */
+    @PATCH("posts/{id}")
+    Call<Post> patchPost(@Path("id") int id, @Body Post post);
+
+    /**
+     * Delete Post
+     *
+     * @param id which post will be deleted.
+     * @return response code
+     */
+    @DELETE("posts/{id}")
+    Call<Void> deletePost(@Path("id") int id);
 
 }
