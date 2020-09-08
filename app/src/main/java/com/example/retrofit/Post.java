@@ -34,7 +34,7 @@ public class Post {
      *
      * @return post id which is coming from JSON
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
