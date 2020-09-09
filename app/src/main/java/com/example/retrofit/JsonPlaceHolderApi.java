@@ -11,6 +11,8 @@ import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -127,9 +129,12 @@ public interface JsonPlaceHolderApi {
      * @param id   which post will be updated.
      * @param post is new post which will be replaced with old one.
      * @return post which is updated
+     * @PUT("posts/{id}") Call<Post> putPost(@Path("id") int id, @Body Post post);
      */
+
+    @Headers({"Static-Header: 123", "Static-Header2: 456"})
     @PUT("posts/{id}")
-    Call<Post> putPost(@Path("id") int id, @Body Post post);
+    Call<Post> putPost(@Header("Dynamic-Header") String header, @Path("id") int id, @Body Post post);
 
     /**
      * Patch Post

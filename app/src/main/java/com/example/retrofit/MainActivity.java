@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
     private void updatePost() {
         Post post = new Post(12, null, "Text");
 
-        Call<Post> call = jsonPlaceHolderApi.putPost(5, post);
+        Call<Post> call = jsonPlaceHolderApi.putPost("abc",5, post);
         call.enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
